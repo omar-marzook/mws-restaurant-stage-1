@@ -49,7 +49,7 @@
   <main id="maincontent">
     <!-- Beginning map -->
     <section id="map-container" aria-label="Google Map">
-      <div id="map"></div>
+      <div id="map" aria-hidden="true"></div>
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
@@ -82,8 +82,21 @@
   <!-- Beginning scripts -->
   <!-- Database helpers -->
   <script type="text/javascript" src="js/dbhelper.js"></script>
-  <!-- Service Workers -->
-  <script src="js/sw.js"></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(function () {
+          console.log('Service Worker Registered');
+        })
+        .catch(error => {
+          console.log('Service Worker Registration Failed!');
+        });
+    }
+  </script>
+
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
   <!-- Google Maps -->
